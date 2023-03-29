@@ -1,3 +1,78 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended"
+	],
+	"plugins": ["simple-import-sort", "@typescript-eslint"],
+	"parser": "@typescript-eslint/parser",
+	"rules": {
+		// global rules
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
+		// ts rules
+		"quotes": ["error", "single"],
+		"semi": ["error", "never"],
+		"no-useless-concat": "error",
+		"prefer-template": "error",
+		"object-curly-spacing": ["error", "always"],
+		"no-shadow": "off",
+		"no-unused-vars": "off",
+		"no-empty-function": "off",
+		"@typescript-eslint/no-shadow": "error",
+		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-empty-function": "error",
+		"@typescript-eslint/no-this-alias": "error",
+		"@typescript-eslint/no-var-requires": "off",
+		"no-console": [
+			"error",
+			{
+				"allow": ["warn", "error"]
+			}
+		],
+		// tsx rules
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+		"react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
+		// prettier rules
+		"prettier/prettier": [
+			"error",
+			{
+				"printWidth": 100,
+				"singleQuote": true,
+				"trailingComma": "es5",
+				"tabWidth": 2,
+				"useTabs": true,
+				"endOfLine": "auto",
+				"semi": false
+			}
+		]
+	},
+	"overrides": [
+		{
+			"files": ["*.ts", "*.tsx"],
+			"rules": {
+				"simple-import-sort/imports": [
+					"error",
+					{
+						"groups": [
+							// Packages `react` related packages come first.
+							["^react$", "^@?\\w"],
+							// Internal packages.
+							["^(@|components|services)(/.*|$)"],
+							// Side effect imports.
+							["^\\u0000"],
+							// Parent imports. Put `..` last.
+							["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+							// Other relative imports. Put same-folder imports and `.` last.
+							["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+							// Style imports.
+							["^.+\\.?(css)$"]
+						]
+					}
+				]
+			}
+		}
+	]
 }
