@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import type { AppProps } from 'next/app'
 import { Lora, Nunito } from 'next/font/google'
 
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 
 const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
 const lora = Lora({ subsets: ['latin'], variable: '--font-lora' })
